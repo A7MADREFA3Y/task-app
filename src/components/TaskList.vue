@@ -15,7 +15,9 @@ const emit = defineEmits<{
             <label>
                 <input @input="emit('toggleDone', task.id)" :checked="task.done" type="checkbox">
             </label>
-            {{ task.title }}
+            <span :class="{done: task.done}">
+                {{ task.title }}
+            </span>
         </article>
     </div>
 </template>
@@ -23,5 +25,9 @@ const emit = defineEmits<{
 <style>
 .task-list{
     margin-top: 1rem;
+}
+
+.done{
+    text-decoration: line-through;
 }
 </style>
