@@ -14,13 +14,16 @@ const emit = defineEmits<{
         <article v-for="task in props.tasks" :key="task.id">
             <label>
                 <input @input="emit('toggleDone', task.id)" :checked="task.done" type="checkbox">
+                <span :class="{done: task.done}">
+                    {{ task.title }}
+                </span>
             </label>
-            <span :class="{done: task.done}">
-                {{ task.title }}
-            </span>
+            <button>
+                remove
+            </button>
         </article>
     </div>
-</template>
+    </template>
 
 <style>
 .task-list{
