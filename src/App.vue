@@ -28,6 +28,13 @@ function toggelDone(id: string){
   }
 }
 
+function removeTask(id: string){
+  const index = tasks.value.findIndex((task) => task.id === id);
+  if (index !== -1){
+    tasks.value.splice(index,1)
+  }
+}
+
 </script>
 
 <template>
@@ -36,6 +43,6 @@ function toggelDone(id: string){
     <TaskForm @addTask="addTask"/>
     <h3 v-if="!tasks.length"> Add a Task to Get started.</h3>
     <h3 v-else>{{ totalDone }} / {{ tasks.length }} tasks comleted</h3>
-    <TaskList :tasks @toggle-done="toggelDone"/>
+    <TaskList :tasks @toggle-done="toggelDone" @removeTask="removeTask"/>
 </main>
 </template>
