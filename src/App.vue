@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import TaskForm from './components/TaskForm.vue'
 import { ref } from 'vue'
+import type { Task } from './types';
 
 const emit = defineEmits<{ addTask: [task: string] }>()
 
 const message = ref('Welcome to the Task Manager App!')
-const newTask = ref('')
+const tasks = ref<Task[]>([])
 
 function addTask(newTask: string) {
-  console.log('Submitting task:',  newTask)
+  tasks.value.push({
+    id: crypto.randomUUID(),
+    title: newTask,
+    done: false
+  })
 }
 </script>
 
@@ -16,5 +21,6 @@ function addTask(newTask: string) {
   <main>
     <h1>{{ message }}</h1>
     <TaskForm @addTask="addTask"/>
+    <h3> There are {{ tasks.length }} tasks</h3>
   </main>
 </template>
