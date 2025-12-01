@@ -16,12 +16,22 @@ function addTask(newTask: string) {
     done: false
   })
 }
+
+function toggelDone(id: string){
+  const task = tasks.value.find((task) => task.id === id);
+  if(task) { 
+    task.done = !task.done
+  }
+}
+
 </script>
 
 <template>
   <main>
     <h1>{{ message }}</h1>
     <TaskForm @addTask="addTask"/>
-    <TaskList :tasks/>
+    <h3 v-if="!tasks.length"> Add a Task to Get started.</h3>
+    <h3 v-else>0 / {{ tasks.length }} tasks comleted</h3>
+    <TaskList :tasks @toggle-done="toggelDone"/>
 </main>
 </template>
