@@ -1,40 +1,20 @@
-<script lanng="ts" setup>
-import { ref } from "vue"; 
-  const message = ref("Tasks App");
-  const newTask = ref("");
+<script setup lang="ts">
+import TaskForm from './components/TaskForm.vue'
+import { ref } from 'vue'
 
+const emit = defineEmits<{ addTask: [task: string] }>()
+
+const message = ref('Welcome to the Task Manager App!')
+const newTask = ref('')
+
+function addTask(newTask: string) {
+  console.log('Submitting task:',  newTask)
+}
 </script>
-
-
 
 <template>
   <main>
-    <h1>{{message}}</h1>  
-    <from>
-    <label>
-      New Task:
-      <input v-model="newTask" name="newTask"/>
-    </label>
-
-    <div class="button-container">
-      <button>Add</button>
-    </div>
-    
-    </from>
-    <h3>{{newTask}}</h3>
+    <h1>{{ message }}</h1>
+    <TaskForm @addTask="addTask"/>
   </main>
 </template>
-
-<style scoped>
-
-main {
-  max-width: 800px;
-  margin: 1rem auto;
-}
-
-.button-container {
-  display: flex;
-  justify-content: end;
-}
-
-</style>
