@@ -2,6 +2,7 @@
 import TaskForm from './components/TaskForm.vue'
 import { ref } from 'vue'
 import type { Task } from './types';
+import TaskList from './components/TaskList.vue';
 
 const emit = defineEmits<{ addTask: [task: string] }>()
 
@@ -21,8 +22,6 @@ function addTask(newTask: string) {
   <main>
     <h1>{{ message }}</h1>
     <TaskForm @addTask="addTask"/>
-    <article v-for="task in tasks" :key="task.id">
-      {{ task.title }}
-    </article>
+    <TaskList :tasks/>
 </main>
 </template>
