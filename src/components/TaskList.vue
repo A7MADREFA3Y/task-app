@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import { TransitionGroup } from 'vue';
 import type { Task } from '../types';
 const props = defineProps<{
     tasks: Task[]
@@ -11,7 +12,7 @@ const emit = defineEmits<{
 
 </script>
 <template>
-    <div class="task-list">
+    <TransitionGroup name="list" tag="ul" class="task-list">
         <article v-for="task in props.tasks" :key="task.id">
             <label>
                 <input @input="emit('toggleDone', task.id)" :checked="task.done" type="checkbox">
@@ -23,8 +24,8 @@ const emit = defineEmits<{
                 remove
             </button>
         </article>
-    </div>
-    </template>
+    </TransitionGroup>        
+</template>
 
 <style>
 .task-list{
@@ -39,5 +40,15 @@ const emit = defineEmits<{
 
 .done{
     text-decoration: line-through;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(300px);
 }
 </style>
