@@ -43,6 +43,27 @@ function removeTask(id: string){
     <TaskForm @addTask="addTask"/>
     <h3 v-if="!tasks.length"> Add a Task to Get started.</h3>
     <h3 v-else>{{ totalDone }} / {{ tasks.length }} tasks comleted</h3>
+    <div v-if="tasks.length" class="button-container">
+      <button class="secondary">All</button>
+      <button class="secondary">Todo</button>
+      <button class="secondary">Done</button>
+    </div>
     <TaskList :tasks @toggle-done="toggelDone" @removeTask="removeTask"/>
 </main>
 </template>
+
+<style>
+
+main{
+ max-width: 800px;
+ margin: 1rem; 
+}
+
+.button-container{
+  display: flex;
+  justify-content: end;
+  gap: 0.5rem;
+}
+
+</style>
+
