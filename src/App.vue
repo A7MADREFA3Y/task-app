@@ -64,9 +64,21 @@ function setFilter(value: TaskFilter) {
     <h3 v-if="!tasks.length"> Add a Task to Get started.</h3>
     <h3 v-else>{{ totalDone }} / {{ tasks.length }} tasks comleted</h3>
     <div v-if="tasks.length" class="button-container">
-      <FilterButton filter="all" @set-filter="setFilter" />
-      <FilterButton filter="todo" @set-filter="setFilter" />
-      <FilterButton filter="done" @set-filter="setFilter" />
+      <FilterButton 
+        :currentFilter="filter"
+        filter="all"
+        @set-filter="setFilter"
+      />
+      <FilterButton
+        :currentFilter="filter"
+        filter="todo"
+        @set-filter="setFilter"
+      />
+      <FilterButton
+        :currentFilter="filter"
+        filter="done"
+        @set-filter="setFilter"
+      />
     </div>
     <TaskList :tasks="filteredTasks" @toggle-done="toggelDone" @removeTask="removeTask"/>
 </main>
